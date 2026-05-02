@@ -16,21 +16,40 @@ function Login() {
   };
 
   return (
-    <div className="container">
+    <div className="container login-container">
       <h2>Login</h2>
-      <input
-        type="text"
-        placeholder="Phone Number"
-        onChange={(e) => setPhone(e.target.value)}
-        value={phone}
-      />
-      <input
+      <p>Welcome back</p>
+      
+        <div className="input-group">
+        <label>Phone Number</label>
+        <div className="phone-contact">
+          <div className="country-code">+234</div>
+          <input
+          type='number'
+            name="phone"
+            placeholder="Phone Number"
+             onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+          />
+        </div>
+      </div>
+      
+     <div className="input-group">
+      <label>Phone Number</label>
+       <input
         type="password"
-        placeholder="Password"
+        placeholder="Enter Password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
-      <button onClick={handleLogin}>Log In</button>
+      <div  className='login forget-btn'>Forgotten Password?</div>
+     </div>
+     
+      <button className='continue-btn login-btn' onClick={handleLogin}>Log In</button>
+
+      <div className="login-prompt">
+        Already have an account? <span onClick={() => navigate('/signup')}>Sign Up</span>
+      </div>
     </div>
   );
 }

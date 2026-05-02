@@ -13,10 +13,47 @@ function CollectorVerificationStep1() {
     address: "",
   });
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  
+    const [error, setError] = useState("");
 
-  const handleContinue = () => navigate("/verify-step2");
+  const handleChange = (e) =>{
+     setError("");
+      setForm({ ...form, [e.target.name]: e.target.value });
+  }
+   
+
+  const handleContinue = () =>{ 
+    if (form.NIN.length !== 11) {
+      setError("NIN must be exactly 11 digits.");
+      return;
+    }
+    if (!form.name.trim()) {
+      setError("Full name is required.");
+      return;
+    }
+    if (!form.phone.trim()) {
+      setError("Phone number is required.");
+      return;
+    
+  };
+
+   sessionStorage.setItem(
+      "collectorStep1",
+      JSON.stringify({
+        nin: form.NIN,
+        full_name: form.name,
+        email: form.email || null,
+        phone: form.phone,
+        address: form.address,
+      })
+    );
+    navigate("/verify-step2");
+  };
+
+  const isFormValid =
+    form.NIN.trim().length === 11 &&
+    form.name.trim().length > 0 &&
+    form.phone.trim().length > 0;
 
   return (
     <div className="verification-card">
@@ -37,6 +74,8 @@ function CollectorVerificationStep1() {
         <input
           name="NIN"
           placeholder="11 digits"
+          maxLength={11}
+          inputMode="numeric"
           onChange={handleChange}
           value={form.NIN}
         />
@@ -84,8 +123,9 @@ function CollectorVerificationStep1() {
         ></textarea>
         <p className="helper-text">Use Current location/address. </p>
       </div>
+      {error && <p className="error">{error}</p>}
       
-      <button onClick={handleContinue} disabled={!form.NIN} className="continue-btn">
+      <button onClick={handleContinue} disabled={!isFormValid} className="continue-btn">
         Continue
       </button>
       <div className="login-prompt">
