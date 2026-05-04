@@ -13,47 +13,61 @@ function CollectorVerificationStep1() {
     address: "",
   });
 
-  
-    const [error, setError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [ninError, setNinError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [addressError, setAddressError] = useState("");
 
-  const handleChange = (e) =>{
-     setError("");
-      setForm({ ...form, [e.target.name]: e.target.value });
-  }
-   
+  const handleChange = (e) => {
+    if (e.target.name === "NIN") setNinError("");
+    if (e.target.name === "name") setNameError("");
+    if (e.target.name === "email") setEmailError("");
+    if (e.target.name === "phone") setPhoneError("");
+    if (e.target.name === "address") setAddressError("");
+    
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  const handleContinue = () =>{ 
+  // // Validation Logic
+  // const isFormValid = 
+  //   form.NIN.length === 11 && 
+  //   form.name.trim().length >= 8 && 
+  //   form.email.includes("@") && 
+  //   form.phone.trim().length === 10 &&
+  //   form.address.trim().length > 0;
+
+  // Validation Handler
+  const handleContinue = () => {
+    let isValid = true;
+
     if (form.NIN.length !== 11) {
-      setError("NIN must be exactly 11 digits.");
-      return;
+      setNinError("NIN must be exactly 11 digits.");
+      isValid = false;
     }
-    if (!form.name.trim()) {
-      setError("Full name is required.");
-      return;
+    if (form.name.trim().length < 8) {
+      setNameError("Full name is required and must be at least 8 characters long.");
+      isValid = false;
+    }
+     
+    if (form.email && !form.email.includes("@")) {
+      setEmailError("Please enter a valid email address.");
+      isValid = false;
     }
     if (!form.phone.trim()) {
-      setError("Phone number is required.");
-      return;
-    
-  };
+      setPhoneError("Phone number is required.");
+      isValid = false;
+    }
+    if (!form.address.trim()) {
+      setAddressError("Address is required.");
+      isValid = false;
+    }
 
-   sessionStorage.setItem(
-      "collectorStep1",
-      JSON.stringify({
-        nin: form.NIN,
-        full_name: form.name,
-        email: form.email || null,
-        phone: form.phone,
-        address: form.address,
-      })
-    );
-    navigate("/verify-step2");
+    if (isValid) {
+      sessionStorage.setItem("collectorStep1", JSON.stringify(form));
+      navigate("/verify-step2");
+    }
   };
-
-  const isFormValid =
-    form.NIN.trim().length === 11 &&
-    form.name.trim().length > 0 &&
-    form.phone.trim().length > 0;
 
   return (
     <div className="verification-card">
@@ -69,8 +83,9 @@ function CollectorVerificationStep1() {
         <div className="progress-bar active"></div>
         <div className="progress-bar"></div>
       </div>
+
       <div className="input-group">
-         <label>NIN (National Identification Number)</label>
+        <label>NIN (National Identification Number)</label>
         <input
           name="NIN"
           placeholder="11 digits"
@@ -79,7 +94,9 @@ function CollectorVerificationStep1() {
           onChange={handleChange}
           value={form.NIN}
         />
+        {ninError && <p className="error" style={{ color: "red", fontSize: "14px" }}>{ninError}</p>}
       </div>
+
       <div className="input-group">
         <label>Full Name</label>
         <input
@@ -88,16 +105,20 @@ function CollectorVerificationStep1() {
           onChange={handleChange}
           value={form.name}
         />
+        {nameError && <p className="error" style={{ color: "red", fontSize: "14px" }}>{nameError}</p>}
       </div>
+
       <div className="input-group">
-        <label>Email(if Any)</label>
+        <label>Email (if Any)</label>
         <input
           name="email"
           placeholder="E.g Davidjones@gmail.com"
           onChange={handleChange}
           value={form.email}
         />
+        {emailError && <p className="error" style={{ color: "red", fontSize: "14px" }}>{emailError}</p>}
       </div>
+
       <div className="input-group">
         <label>Phone Number</label>
         <div className="phone-contact">
@@ -109,10 +130,11 @@ function CollectorVerificationStep1() {
             value={form.phone}
           />
         </div>
+        {phoneError && <p className="error" style={{ color: "red", fontSize: "14px" }}>{phoneError}</p>}
       </div>
+
       <div className="input-group">
         <label>Residential/Office Address</label>
-        <input />
         <textarea
           name="address"
           placeholder="Street name, building number, apartment"
@@ -121,15 +143,16 @@ function CollectorVerificationStep1() {
           rows={5}
           cols={6}
         ></textarea>
-        <p className="helper-text">Use Current location/address. </p>
+        <p className="helper-text">Use Current location/address.</p>
+        {addressError && <p className="error" style={{ color: "red", fontSize: "14px" }}>{addressError}</p>}
       </div>
-      {error && <p className="error">{error}</p>}
-      
-      <button onClick={handleContinue} disabled={!isFormValid} className="continue-btn">
+
+      <button onClick={handleContinue}  className="continue-btn">
         Continue
       </button>
+
       <div className="login-prompt">
-        Already have an account? <span onClick={() => navigate('/login')}>Log In</span>
+        Already have an account? <span onClick={() => navigate("/login")}>Log In</span>
       </div>
 
       <div className="identity-protection">

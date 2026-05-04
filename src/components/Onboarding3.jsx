@@ -8,7 +8,9 @@ function Onboarding3() {
   return (
     <div className="container onboarding3">
       <div className="onboarding3-icon">
-        <div className="icon-wrapper"></div>
+        <div className="icon-wrapper">
+          <img src="/src/assets/Recycle 2.png" alt="recycle" width={80}/>
+        </div>
             
         <h2 className="onboarding3-h2">Recycle.Earn</h2>
       </div>

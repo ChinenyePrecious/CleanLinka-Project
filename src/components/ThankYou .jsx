@@ -8,7 +8,9 @@ function ThankYou() {
     <div className="container  thankyou-container">
       <div className="circles">
         <div className="green-circle">
-          <div className="orange-circle"></div>
+          <div className="orange-circle">
+            <img src="/src/assets/streamline-pixelinterface-essential-waiting-hourglass-loading.png" alt="waiting-hour" />
+          </div>
         </div>
       </div>
       <div className="thankyou-text">

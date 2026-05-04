@@ -59,6 +59,27 @@ function CollectorVerificationStep2() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+   const [error, setError] = useState('');
+
+  const handleRegister = async () => {
+    if (password !== confirmPassword) return setError("Passwords do not match!");
+    if (password.length < 8) return setError("Password must be at least 8 characters.");
+    
+    const step1Data = JSON.parse(sessionStorage.getItem("collectorStep1"));
+    const response = await fetch("https://4543-102-0-6-206.ngrok-free.app/api/auth/register/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...step1Data, password })
+    });
+    
+    if (response.ok) {
+        sessionStorage.removeItem("collectorStep1");
+        navigate('/verify-phone');
+    } else {
+        setError("Registration failed.Please check your details.");
+    }
+  };
+
 
   const isFormValid = password.length >= 8 && password === confirmPassword;
 
@@ -107,9 +128,9 @@ function CollectorVerificationStep2() {
           <p className="step2-helper">Password must be at least 8 characters</p>
         </div>
       </div>
-
+      {error && <p className="step2-error">{error}</p>}
       <button 
-        onClick={() => isFormValid && navigate('/verify-phone')} 
+        onClick={() => handleRegister()} 
         className='step2-continue-btn' 
         disabled={!isFormValid}
       >
