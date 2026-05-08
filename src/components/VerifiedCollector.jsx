@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import verified from '../assets/Frame 177.png';
-import collectorImg from '..'
+import collectorImg from '../assets/Frame 170.png';
 
 function VerifiedCollector() {
   const navigate = useNavigate();
