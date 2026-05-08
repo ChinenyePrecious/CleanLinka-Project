@@ -1,4 +1,5 @@
 import React from "react";
+import recycleImg from "../assets/Recycle 2.png";
 
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +10,7 @@ function Onboarding3() {
     <div className="container onboarding3">
       <div className="onboarding3-icon">
         <div className="icon-wrapper">
-          <img src="/src/assets/Recycle 2.png" alt="recycle" width={80}/>
+          <img src={recycleImg} alt="recycle" width={80}/>
         </div>
             
         <h2 className="onboarding3-h2">Recycle.Earn</h2>

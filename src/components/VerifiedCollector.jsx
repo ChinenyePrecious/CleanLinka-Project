@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import verified from '../assets/Frame 177.png';
+import collectorImg from '..'
 
 function VerifiedCollector() {
   const navigate = useNavigate();
@@ -9,7 +11,7 @@ function VerifiedCollector() {
       <div className="circles">
          <div className='green-circle'>
       <div className='orange-circle'>
-          <img src="/src/assets/Frame 177.png" alt="" />
+          <img src={verified} alt="" />
       </div>
     </div>
       </div>
@@ -23,7 +25,7 @@ function VerifiedCollector() {
 
       <div className="collector-profile">
         <div className="collector-picture">
-        <img src="/src/assets/Frame 170.png" alt="" />
+        <img src={collectorImg} alt="" />
         </div>
         <div className="collector-details">
           <h2>Ben Ade</h2>

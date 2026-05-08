@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import handShake from "../assets/emojionehandshake.png";
 
 function Onboarding2() {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ function Onboarding2() {
     <div className="container onboarding2">
       <div className="onboarding2-icon">
         <div className="icon-wrapper">
-         <img src="/src/assets/emojionehandshake.png" alt="handshake" width={80}/>
+         <img src={handShake} alt="handshake" width={80}/>
         </div>
 
         <h2 className="onboarding2-h2">

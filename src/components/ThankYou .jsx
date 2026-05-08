@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import hourglass from "../assets/streamline-pixelinterface-essential-waiting-hourglass-loading.png";
 
 function ThankYou() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ function ThankYou() {
       <div className="circles">
         <div className="green-circle">
           <div className="orange-circle">
-            <img src="/src/assets/streamline-pixelinterface-essential-waiting-hourglass-loading.png" alt="waiting-hour" />
+            <img src={hourglass} alt="waiting-hour" />
           </div>
         </div>
       </div>

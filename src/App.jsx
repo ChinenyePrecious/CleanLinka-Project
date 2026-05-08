@@ -1,4 +1,5 @@
 import React from "react";
+import cleanlikaLogo from "./assets/Cleanlinka Logo.png";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Onboarding1 from "./components/Onboarding1";
 import Onboarding2 from "./components/Onboarding2";
@@ -15,7 +16,7 @@ import "./index.css";
 function App() {
   return (
     <Router>
-      <img src= "/src/assets/Cleanlinka Logo.png" alt="CleanlinkaLogo" className="CleanlinkaLogo"/>
+      <img src={cleanlikaLogo} alt="CleanlinkaLogo" className="CleanlinkaLogo"/>
       <Routes>
         <Route path="/" element={<Onboarding1 />} />
         <Route path="/onboarding2" element={<Onboarding2 />} />
