@@ -32,7 +32,9 @@ function VerifyPhone() {
 
   return (
     <div className="verify-phone-container">
+      
       <h2>Verify Phone</h2>
+      <h3>Enter OTP code </h3>
       <div className="otp-input-wrapper">
         {otp.map((digit, index) => (
           <input key={index} ref={el => inputs.current[index] = el} className="otp-box"

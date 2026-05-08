@@ -666,7 +666,11 @@ textarea {
 }
 
 /* ================= VERIFY PHONE ================= */
-
+.verify-phone-container h3{
+  color:#410909;
+  font-size: 12px;
+ 
+}
 .verify-title {
   color: var(--black);
   font-size: 20px;
