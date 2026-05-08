@@ -15,6 +15,7 @@ import "./index.css";
 function App() {
   return (
     <Router>
+      <img src= "/src/assets/Cleanlinka Logo.png" alt="CleanlinkaLogo" className="CleanlinkaLogo"/>
       <Routes>
         <Route path="/" element={<Onboarding1 />} />
         <Route path="/onboarding2" element={<Onboarding2 />} />
